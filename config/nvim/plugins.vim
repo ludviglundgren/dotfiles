@@ -51,41 +51,68 @@ Plug 'tpope/vim-sleuth' " detect indent style (tabs vs. spaces)
 Plug 'sickill/vim-pasta' " context-aware pasting
 Plug 'vimwiki/vimwiki' " vim wiki for docs and journal
 
-" html / templates
-Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim - easily create markdup wth CSS-like syntax
-Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
-Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
-Plug 'mustache/vim-mustache-handlebars' " mustach support
-Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] } " jade support
+" Language-specific Configuration {{{
+    " html / templates {{{
+        " emmet support for vim - easily create markdup wth CSS-like syntax
+        Plug 'mattn/emmet-vim', { 'for': ['html', 'javascript.jsx']}
+        let g:user_emmet_settings = {
+        \  'javascript.jsx': {
+        \      'extends': 'jsx',
+        \  },
+        \}
 
-" JavaScript
-Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
-Plug 'moll/vim-node', { 'for': 'javascript' } " node support
-Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
-Plug 'mxw/vim-jsx', { 'for': ['jsx', 'javascript'] } " JSX support
+        " match tags in html, similar to paren support
+        Plug 'gregsexton/MatchTag', { 'for': 'html' }
+        Plug 'othree/html5.vim', { 'for': 'html' }
 
-" TypeScript
-" Plug 'jason0x43/vim-tss', { 'for': 'typescript', 'do': 'npm install' }
-Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' } " extended typescript support - works as a client for TSServer
-Plug 'clausreinke/typescript-tools.vim', { 'for': 'typescript' } " typescript tools
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " typescript support
+        " templates
+        Plug 'mustache/vim-mustache-handlebars'
+        Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
+    " }}}
 
-" styles
-Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
-Plug 'groenewege/vim-less', { 'for': 'less' } " less support
-Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
-Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
+    " JavaScript {{{
+        Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
+        " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
+        Plug 'moll/vim-node', { 'for': 'javascript' }
+        Plug 'mxw/vim-jsx', { 'for': ['javascript.jsx', 'javascript'] }
+        Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
+    " }}}
 
-" Markdown support
-Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
-Plug 'tpope/vim-markdown', { 'for': 'markdown' } " markdown support
+    " TypeScript {{{
+        Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+        Plug 'ianks/vim-tsx', { 'for': 'typescript' }
+        Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+    " }}}
 
-" language-specific plugins
-Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
-Plug 'Shougo/vimproc.vim', { 'do': 'make' } " interactive command execution in vim
-Plug 'fatih/vim-go', { 'for': 'go' } " go support
-Plug 'timcharper/textile.vim', { 'for': 'textile' } " textile support
+    " Styles {{{
+        Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }
+        Plug 'groenewege/vim-less', { 'for': 'less' }
+        Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+        Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+        Plug 'gko/vim-coloresque'
+        Plug 'stephenway/postcss.vim', { 'for': 'css' }
+        " Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
+    " }}}
+
+    " Markdown {{{
+        Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+        " let g:markdown_fenced_languages = [ 'tsx=typescript.tsx' ]
+
+        " Open markdown files in Marked.app - mapped to <leader>m
+        Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
+        " nmap <leader>m :MarkedOpen!<cr>
+        " nmap <leader>mq :MarkedQuit<cr>
+        " nmap <leader>* *<c-o>:%s///gn<cr>
+    " }}}
+
+    " JSON {{{
+        Plug 'elzr/vim-json', { 'for': 'json' }
+        " let g:vim_json_syntax_conceal = 0
+    " }}}
+
+
+    Plug 'fatih/vim-go', { 'for': 'go' } " go support
+    Plug 'ekalinin/Dockerfile.vim'
+" }}}
 
 call plug#end()
